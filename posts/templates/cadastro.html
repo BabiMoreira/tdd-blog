@@ -3,4 +3,19 @@
 
 {% block content %}
 
+<h1>Cadastro</h1>
+<h3>Faça um pedido para o seu post </h3>
+
+{% if formalario %}
+    <form method="POST">
+        {% csrf_token %}
+        {{formulario}}
+    <button> Enviar pedido </button>
+    </form>
+{% endif %}
+
+{% if msg %}
+<h3>{{msg}}</h3>
+{% endif %}
+
 {% endblock %}

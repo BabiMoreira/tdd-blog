@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .forms import PedidoForm
 
 
 def home(request):
@@ -8,27 +9,19 @@ def posts(request):
     return render(request, 'posts.html')
 
 def cadastro(request):
-    return render(request, 'cadastro.html')
+    form = PedidoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        contexto = {
+            'msg': 'Parabens, o seu pedido foi realizado com sucesso'
+        }
+        return render(request, 'cadastro.html', contexto)
+    
+    contexto = {
+        'formulario': form
+    }
+    
+    return render(request, 'cadastro.html', contexto)
+    
 
 
-
-
-
-
-
-
-
-
-
-    # nome = 'groger'
-    # # posts = {
-    # #     'Gabriel' : 'Narnia para projetos ágeis',
-    # #     'Vinicius': 'IA para comer biscoitos',
-    # #     'Ana Lu': 'BTS é muito bondoso',
-    # #     'Downtown': 'Não seja maníaco'
-    # # }
-    # # lista = ['Roré', 'Generro', 'Anlu', 'DOwnT0wn']
-    # # contexto = {
-    # #     'nome': nome,
-    # #     'lista': lista
-    # # }
